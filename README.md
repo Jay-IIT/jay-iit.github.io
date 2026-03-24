@@ -1,7 +1,7 @@
-- 👋 Hi, I’m Jay
-- 👀 I’m interested in Working with Highly Scalable Architectures
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ... Jay.bv@yahoo.com
+# Jayavelu Balaji — Personal Portfolio
 
- 
+Director of AI/ML at FlexTecs. Building secure, production-grade AI agent systems.
+
+🔗 **Live site:** [jayavelubalaji.com](https://jayavelubalaji.com)
+
+Built with HTML, CSS, and vanilla JS. Hosted on GitHub Pages.
