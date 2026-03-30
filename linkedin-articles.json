@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Securing LangChain in Financial Services: Lessons from a Critical Vulnerability",
+    "url": "https://www.linkedin.com/pulse/securing-langchain-financial-services-lessons-from-critical-balaji-rsfkc/",
+    "date": "2026-02-13",
+    "description": "How CVE-2025-68664 exposed the risks of running LLM frameworks in regulated environments — and what to do about it. A critical serialization injection vulnerability put every unpatched LangChain deployment at risk of remote code execution, secret exfiltration, and full workflow compromise.",
+    "tags": ["LangChain", "AI Security", "Financial Services", "CVE"]
+  }
+]
+
