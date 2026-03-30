@@ -990,6 +990,217 @@ section {
 }
 
 /* ============================================================
+   RESEARCH PAGE
+   ============================================================ */
+
+.research-page {
+  padding-block: var(--space-12);
+}
+
+/* Profile link cards (Scholar / ResearchGate) */
+.research-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.research-profile-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+
+.research-profile-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+  color: var(--color-primary);
+}
+
+.research-profile-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.research-profile-card__icon--scholar {
+  background: #4285F4;
+  color: #fff;
+}
+
+.research-profile-card__icon--rg {
+  background: #00CCBB;
+  color: #fff;
+}
+
+.research-profile-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.research-profile-card__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  font-weight: 400;
+}
+
+/* Research area chips */
+.research-areas {
+  margin-bottom: var(--space-12);
+}
+
+.research-areas__title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-4);
+}
+
+.research-areas__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.research-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  color: var(--color-primary);
+  border-radius: 100px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Publication cards */
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.publication-card {
+  display: flex;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive),
+              transform var(--transition-interactive);
+}
+
+.publication-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,.07);
+  transform: translateY(-2px);
+}
+
+.publication-card__year {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.publication-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.publication-card__journal {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2);
+}
+
+.publication-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+  line-height: 1.35;
+}
+
+.publication-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-3);
+}
+
+.publication-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.publication-card__arrow {
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--color-text-faint);
+  transition: color var(--transition-interactive), transform var(--transition-interactive);
+}
+
+.publication-card:hover .publication-card__arrow {
+  color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+@media (max-width: 600px) {
+  .publication-card {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .publication-card__year {
+    width: 44px;
+    height: 44px;
+    font-size: var(--text-xs);
+  }
+  .publication-card__arrow {
+    display: none;
+  }
+}
+
+/* ============================================================
    SCROLL ANIMATIONS
    ============================================================ */
 

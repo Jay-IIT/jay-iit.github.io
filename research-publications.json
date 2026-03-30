@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Enhancing Reasoning Efficiency in DeepSeek-R1",
+    "year": 2025,
+    "journal": "Nano-NTP",
+    "journal_full": "Journal of Nano-NTP",
+    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "description": "Investigates techniques to improve the reasoning efficiency of DeepSeek-R1, a large language model, focusing on reducing computational overhead while maintaining accuracy across complex reasoning benchmarks.",
+    "tags": ["LLM", "Reasoning", "DeepSeek", "Efficiency"]
+  },
+  {
+    "title": "Semantic Search on Peloton Data",
+    "year": 2025,
+    "journal": "IJLRP",
+    "journal_full": "International Journal of Latest Research in Patterns",
+    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "description": "Applies semantic search and vector embedding techniques to Peloton fitness datasets, demonstrating how NLP-driven information retrieval outperforms keyword-based search in health and wellness domains.",
+    "tags": ["Semantic Search", "NLP", "Vector Embeddings", "Information Retrieval"]
+  },
+  {
+    "title": "Dynamic Hand Gesture Recognition for Sign Language",
+    "year": 2024,
+    "journal": "IJISAE",
+    "journal_full": "International Journal of Intelligent Systems and Applications in Engineering",
+    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "description": "Presents a deep learning pipeline for real-time hand gesture recognition targeting sign language interpretation, combining convolutional and recurrent architectures to handle temporal dynamics.",
+    "tags": ["Computer Vision", "Sign Language", "Deep Learning", "Gesture Recognition"]
+  },
+  {
+    "title": "Smart Retail Ensemble Techniques for Customer Analysis",
+    "year": 2023,
+    "journal": "JCAA",
+    "journal_full": "Journal of Computational Analysis and Applications",
+    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "description": "Proposes ensemble machine learning methods for customer behaviour analysis in smart retail environments, integrating transactional and demographic data to improve predictive accuracy for personalisation.",
+    "tags": ["Ensemble Learning", "Retail Analytics", "Machine Learning", "Customer Analysis"]
+  }
+]
+
