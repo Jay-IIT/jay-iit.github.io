@@ -105,6 +105,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="container hero__inner">
       <div class="hero__content">
         <div class="hero__tag">Director of AI/ML · AI Security Researcher · Technical Leader</div>
@@ -598,6 +599,115 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ── Hero Particle Network ──────────────────────────────────────
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const N = 70;        // number of particles
+  const LINK = 130;    // max link distance
+  let W, H, particles, mouse = { x: -999, y: -999 };
+
+  function resize() {
+    const hero = canvas.parentElement;
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function getColor() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return isDark ? '20,184,166' : '15,118,110';
+  }
+
+  function initParticles() {
+    particles = Array.from({ length: N }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2 + 1.2
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const col = getColor();
+
+    // Mouse-attractor: gently shift velocities toward cursor
+    particles.forEach(p => {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 200) {
+        p.vx += dx * 0.00015;
+        p.vy += dy * 0.00015;
+      }
+      // Speed cap
+      const speed = Math.hypot(p.vx, p.vy);
+      if (speed > 1.2) { p.vx *= 0.98; p.vy *= 0.98; }
+
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) { p.x = 0; p.vx *= -1; }
+      if (p.x > W) { p.x = W; p.vx *= -1; }
+      if (p.y < 0) { p.y = 0; p.vy *= -1; }
+      if (p.y > H) { p.y = H; p.vy *= -1; }
+
+      // Node dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${col},0.6)`;
+      ctx.fill();
+    });
+
+    // Connection lines
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.hypot(dx, dy);
+        if (d < LINK) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(${col},${0.18 * (1 - d / LINK)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initParticles();
+  draw();
+
+  window.addEventListener('resize', () => { resize(); initParticles(); }, { passive: true });
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  }, { passive: true });
+  canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+})();
+
+// ── Vanilla-Tilt 3D hover on cards & connect links ────────────
+(function loadTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js';
+  s.onload = function () {
+    VanillaTilt.init(document.querySelectorAll('.project-card'), {
+      max: 8, speed: 400, glare: true, 'max-glare': 0.12, scale: 1.02
+    });
+    VanillaTilt.init(document.querySelectorAll('.connect-link'), {
+      max: 6, speed: 400, glare: false, scale: 1.03
+    });
+    VanillaTilt.init(document.querySelectorAll('.article-item'), {
+      max: 4, speed: 400, glare: false, scale: 1.01
+    });
+  };
+  document.body.appendChild(s);
+})();
 </script>
 
 </body>

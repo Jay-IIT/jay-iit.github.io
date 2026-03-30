@@ -231,6 +231,23 @@ function showEmpty(container, source) {
     ? all.map(renderCard).join('')
     : '<p style="color:var(--color-text-faint)">No articles found.</p>';
 })();
+
+// ── Vanilla-Tilt 3D hover on article cards ────────────────────
+(function loadTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js';
+  s.onload = function () {
+    // article cards are rendered async; observe DOM for them
+    const init = () => VanillaTilt.init(document.querySelectorAll('.article-item'), {
+      max: 4, speed: 400, glare: false, scale: 1.01
+    });
+    init();
+    // re-init after dynamic render
+    setTimeout(init, 2000);
+  };
+  document.body.appendChild(s);
+})();
 </script>
 </body>
 </html>

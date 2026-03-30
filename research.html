@@ -192,6 +192,21 @@
     list.innerHTML = `<p style="color:var(--color-text-faint)">Could not load publications. <a href="https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">View on Google Scholar →</a></p>`;
   }
 })();
+
+// ── Vanilla-Tilt 3D hover on publication cards ─────────────────
+(function loadTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js';
+  s.onload = function () {
+    const init = () => VanillaTilt.init(document.querySelectorAll('.publication-card'), {
+      max: 5, speed: 400, glare: true, 'max-glare': 0.08, scale: 1.02
+    });
+    init();
+    setTimeout(init, 2000);
+  };
+  document.body.appendChild(s);
+})();
 </script>
 </body>
 </html>
