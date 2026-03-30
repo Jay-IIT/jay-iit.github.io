@@ -336,19 +336,12 @@
         <h2 class="section-title">Articles & Research</h2>
         <p class="section-desc">Technical deep-dives on AI security, agentic systems, and LLM infrastructure.</p>
       </div>
-      <div class="articles-list">
-
-        <a href="https://dev.to/jayavelu_balaji_7a99a6187/the-hidden-dangers-of-ai-agents-11-critical-security-risks-in-model-context-protocol-mcp-2hi5" target="_blank" rel="noopener noreferrer" class="article-item">
-          <div class="article-item__content">
-            <div class="article-item__date">February 2026</div>
-            <h3 class="article-item__title">The Hidden Dangers of AI Agents: 11 Critical Security Risks in Model Context Protocol (MCP)</h3>
-            <p class="article-item__excerpt">A deep technical analysis of emerging vulnerabilities in agentic AI infrastructure, covering CVE-2025-6514, tool poisoning attacks, permission management failures, and cross-server context abuse.</p>
-          </div>
-          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-
+      <div class="articles-list" id="articles-list">
+        <p class="articles-loading">Loading articles…</p>
       </div>
-      <p style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--color-text-faint);">More articles coming soon. Follow me on <a href="https://dev.to/jayavelu_balaji_7a99a6187" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">Dev.to</a> to stay updated.</p>
+      <p style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--color-text-faint);">
+        Follow me on <a href="https://dev.to/jayavelu_balaji_7a99a6187" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">Dev.to</a> for the latest articles.
+      </p>
     </div>
   </section>
 
@@ -509,6 +502,43 @@
 })();
 
 
+
+// Dev.to articles — fetched live from the public API
+(async function loadArticles() {
+  const container = document.getElementById('articles-list');
+  if (!container) return;
+
+  try {
+    const res = await fetch('https://dev.to/api/articles?username=jayavelu_balaji_7a99a6187&per_page=10&state=published');
+    if (!res.ok) throw new Error('API error');
+    const articles = await res.json();
+
+    if (!articles.length) {
+      container.innerHTML = '<p style="color:var(--color-text-faint)">No articles published yet.</p>';
+      return;
+    }
+
+    container.innerHTML = articles.map(a => {
+      const date = new Date(a.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      const excerpt = a.description ? `<p class="article-item__excerpt">${a.description}</p>` : '';
+      const tags = a.tag_list.length
+        ? `<div class="article-item__tags">${a.tag_list.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}</div>`
+        : '';
+      return `
+        <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="article-item">
+          <div class="article-item__content">
+            <div class="article-item__date">${date}</div>
+            <h3 class="article-item__title">${a.title}</h3>
+            ${excerpt}
+            ${tags}
+          </div>
+          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>`;
+    }).join('');
+  } catch {
+    container.innerHTML = '<p style="color:var(--color-text-faint)">Could not load articles. <a href="https://dev.to/jayavelu_balaji_7a99a6187" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">View on Dev.to →</a></p>';
+  }
+})();
 
 // Contact form handler — submits via Formspree (no backend needed)
 // Sign up at https://formspree.io, create a form, and replace YOUR_FORM_ID below.

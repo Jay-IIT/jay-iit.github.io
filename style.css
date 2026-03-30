@@ -669,6 +669,13 @@ section {
   line-height: 1.5;
 }
 
+.article-item__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
 .article-item__arrow {
   color: var(--color-text-faint);
   flex-shrink: 0;
@@ -679,6 +686,12 @@ section {
 .article-item:hover .article-item__arrow {
   color: var(--color-primary);
   transform: translateX(4px);
+}
+
+.articles-loading {
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+  padding: var(--space-6) 0;
 }
 
 /* ============================================================
