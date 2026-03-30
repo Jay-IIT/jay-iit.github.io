@@ -385,11 +385,11 @@
           </div>
         </a>
 
-        <a id="email-connect-link" href="#" class="connect-link">
+        <a href="#contact" class="connect-link">
           <svg class="connect-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
           <div>
             <div class="connect-link__name">Email</div>
-            <div class="connect-link__handle" id="email-connect-handle">—</div>
+            <div class="connect-link__handle">Use the contact form</div>
           </div>
         </a>
 
@@ -410,12 +410,8 @@
             I'm always interested in discussing AI strategy, enterprise ML challenges, collaboration on open-source projects, or the future of AI in financial technology and recovery audit.
           </p>
           <p>
-            Fill in the form or click the link below to get my email address.
+            Fill in the form and I'll get back to you directly.
           </p>
-          <a id="contact-email-link" href="#" class="contact__email-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-            <span id="contact-email-text">Click to reveal email</span>
-          </a>
         </div>
         <form class="contact-form" onsubmit="handleSubmit(event)" id="contact-form">
           <div class="form-group">
@@ -512,22 +508,7 @@
   document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
 })();
 
-// Email obfuscation — assembled at runtime to prevent scraping
-(function () {
-  const email = atob('amJhbGFqaS5haUBnbWFpbC5jb20='); // base64-encoded
-  const connectLink = document.getElementById('email-connect-link');
-  const connectHandle = document.getElementById('email-connect-handle');
-  const contactLink = document.getElementById('contact-email-link');
-  const contactText = document.getElementById('contact-email-text');
-  if (connectLink && connectHandle) {
-    connectLink.href = 'mailto:' + email;
-    connectHandle.textContent = email;
-  }
-  if (contactLink && contactText) {
-    contactLink.href = 'mailto:' + email;
-    contactText.textContent = email;
-  }
-})();
+
 
 // Contact form handler — submits via Formspree (no backend needed)
 // Sign up at https://formspree.io, create a form, and replace YOUR_FORM_ID below.
