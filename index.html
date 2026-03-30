@@ -108,7 +108,7 @@
       <button class="nav-close" aria-label="Close navigation" onclick="document.querySelector('.nav').classList.remove('is-open')">&times;</button>
       <a href="#about" class="nav__link" onclick="document.querySelector('.nav').classList.remove('is-open')">About</a>
       <a href="#work" class="nav__link" onclick="document.querySelector('.nav').classList.remove('is-open')">Work</a>
-      <a href="#writing" class="nav__link" onclick="document.querySelector('.nav').classList.remove('is-open')">Writing</a>
+      <a href="/articles" class="nav__link">Writing</a>
       <a href="#connect" class="nav__link" onclick="document.querySelector('.nav').classList.remove('is-open')">Connect</a>
       <a href="#contact" class="nav__link" onclick="document.querySelector('.nav').classList.remove('is-open')">Contact</a>
       <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
@@ -339,9 +339,13 @@
       <div class="articles-list" id="articles-list">
         <p class="articles-loading">Loading articles…</p>
       </div>
-      <p style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--color-text-faint);">
-        Follow me on <a href="https://dev.to/jayavelu_balaji_7a99a6187" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">Dev.to</a> for the latest articles.
-      </p>
+      <div style="margin-top: var(--space-8); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+        <p style="font-size: var(--text-sm); color: var(--color-text-faint);">Showing latest 5 articles from Dev.to & LinkedIn.</p>
+        <a href="/articles" class="btn btn--ghost">
+          View All Articles
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -509,7 +513,7 @@
   if (!container) return;
 
   try {
-    const res = await fetch('https://dev.to/api/articles?username=jayavelu_balaji_7a99a6187&per_page=10&state=published');
+    const res = await fetch('https://dev.to/api/articles?username=jayavelu_balaji_7a99a6187&per_page=5&state=published');
     if (!res.ok) throw new Error('API error');
     const articles = await res.json();
 
