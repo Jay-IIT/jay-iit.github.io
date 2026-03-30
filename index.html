@@ -507,38 +507,44 @@
 
 
 
-// Dev.to articles — fetched live from the public API
-(async function loadArticles() {
+// Homepage — latest 5 articles merged from Dev.to + LinkedIn
+(async function loadHomeArticles() {
   const container = document.getElementById('articles-list');
   if (!container) return;
 
+  function renderCard(a) {
+    const date = new Date(a.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const excerpt = a.description ? `<p class="article-item__excerpt">${a.description}</p>` : '';
+    const badge = `<span class="article-item__source article-item__source--${a.source}">${a.source === 'devto' ? 'Dev.to' : 'LinkedIn'}</span>`;
+    const tags = a.tags.length
+      ? `<div class="article-item__tags">${a.tags.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}</div>`
+      : '';
+    return `
+      <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="article-item">
+        <div class="article-item__content">
+          <div class="article-item__meta">${badge}<span class="article-item__date">${date}</span></div>
+          <h3 class="article-item__title">${a.title}</h3>
+          ${excerpt}
+          ${tags}
+        </div>
+        <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>`;
+  }
+
   try {
-    const res = await fetch('https://dev.to/api/articles?username=jayavelu_balaji_7a99a6187&per_page=5&state=published');
-    if (!res.ok) throw new Error('API error');
-    const articles = await res.json();
-
-    if (!articles.length) {
-      container.innerHTML = '<p style="color:var(--color-text-faint)">No articles published yet.</p>';
-      return;
-    }
-
-    container.innerHTML = articles.map(a => {
-      const date = new Date(a.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-      const excerpt = a.description ? `<p class="article-item__excerpt">${a.description}</p>` : '';
-      const tags = a.tag_list.length
-        ? `<div class="article-item__tags">${a.tag_list.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}</div>`
-        : '';
-      return `
-        <a href="${a.url}" target="_blank" rel="noopener noreferrer" class="article-item">
-          <div class="article-item__content">
-            <div class="article-item__date">${date}</div>
-            <h3 class="article-item__title">${a.title}</h3>
-            ${excerpt}
-            ${tags}
-          </div>
-          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>`;
-    }).join('');
+    const [devRes, liRes] = await Promise.all([
+      fetch('https://dev.to/api/articles?username=jayavelu_balaji_7a99a6187&per_page=20&state=published'),
+      fetch('/linkedin-articles.json')
+    ]);
+    const devArticles = (await devRes.json()).map(a => ({
+      title: a.title, url: a.url, date: a.published_at,
+      description: a.description, tags: a.tag_list, source: 'devto'
+    }));
+    const liArticles = (await liRes.json()).map(a => ({ ...a, source: 'linkedin' }));
+    const all = [...devArticles, ...liArticles]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 5);
+    container.innerHTML = all.map(renderCard).join('');
   } catch {
     container.innerHTML = '<p style="color:var(--color-text-faint)">Could not load articles. <a href="https://dev.to/jayavelu_balaji_7a99a6187" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">View on Dev.to →</a></p>';
   }
