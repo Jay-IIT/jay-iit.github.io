@@ -1239,6 +1239,111 @@ section {
 }
 
 /* ============================================================
+   EXPERIENCE TIMELINE
+   ============================================================ */
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.exp-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7, 1.75rem);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.exp-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 16px 48px -10px rgba(15,118,110,0.14), 0 4px 12px -2px rgba(0,0,0,0.07);
+}
+
+.exp-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.exp-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.exp-card__company {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+
+.exp-card__meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.exp-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.exp-card__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.exp-card__bullets li {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.exp-card__bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  top: 4px;
+  font-weight: 700;
+}
+
+.exp-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.exp-card--current {
+  border-left-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-surface) 85%, var(--color-primary-highlight) 100%);
+}
+
+/* ============================================================
    SCROLL ANIMATIONS
    ============================================================ */
 
