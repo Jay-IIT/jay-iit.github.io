@@ -175,9 +175,7 @@
     <div class="container hero__inner">
       <div class="hero__content">
         <div class="hero__tag">Agentic AI Leader at JPMC · AI Security Researcher · Senior AI/ML</div>
-        <h1 class="hero__heading">
-          Jayavelu<br><span>Balaji</span>
-        </h1>
+        <h1 class="hero__heading">Jayavelu <span>Balaji</span></h1>
         <p class="hero__desc">
           Senior Applied AI/ML Leader at <strong style="color:var(--color-text);font-weight:600;">JP Morgan Chase</strong>, architecting enterprise agentic AI and document intelligence systems. AI security researcher — 11 critical MCP vulnerabilities, CVE-2025-6514 (CVSS 10.0 RCE). Open-source contributor to LangChain, LlamaIndex &amp; Hugging Face.
         </p>
@@ -484,8 +482,35 @@
         <h2 class="section-title">Thought Leadership on Agentic AI & Security</h2>
         <p class="section-desc">In-depth writing on Agentic AI system design, AI security vulnerabilities, JPMC-scale LLM infrastructure, and the practical realities of deploying Agentic AI in regulated enterprises.</p>
       </div>
+      <!-- Static cards are the SEO baseline; JS prepends any newer articles it finds -->
       <div class="articles-list" id="articles-list">
-        <p class="articles-loading">Loading articles…</p>
+        <a href="https://dev.to/jayavelubalaji/why-leading-ai-security-experts-disagree-on-the-biggest-threats-to-agentic-ai-systems-and-what-1mai" target="_blank" rel="noopener noreferrer" class="article-item">
+          <div class="article-item__content">
+            <div class="article-item__meta"><span class="article-item__source article-item__source--devto">Dev.to</span><span class="article-item__date">March 2026</span></div>
+            <h3 class="article-item__title">Why Leading AI Security Experts Disagree on the Biggest Threats to Agentic AI Systems — And What Each Side Overlooks</h3>
+            <p class="article-item__excerpt">A deep dive into the fault lines in the AI security community — from prompt injection to supply-chain risk — and the blind spots both camps share.</p>
+            <div class="article-item__tags"><span class="tag">Agents</span><span class="tag">AI</span><span class="tag">Cybersecurity</span></div>
+          </div>
+          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://dev.to/jayavelubalaji/the-hidden-dangers-of-ai-agents-11-critical-security-risks-in-model-context-protocol-mcp-2hi5" target="_blank" rel="noopener noreferrer" class="article-item">
+          <div class="article-item__content">
+            <div class="article-item__meta"><span class="article-item__source article-item__source--devto">Dev.to</span><span class="article-item__date">February 2026</span></div>
+            <h3 class="article-item__title">The Hidden Dangers of AI Agents: 11 Critical Security Risks in Model Context Protocol (MCP)</h3>
+            <p class="article-item__excerpt">Uncovered 11 critical vulnerability classes in MCP — including CVE-2025-6514 (CVSS 10.0), tool poisoning, cross-server context abuse, and secret exfiltration vectors.</p>
+            <div class="article-item__tags"><span class="tag">AI Security</span><span class="tag">MCP</span><span class="tag">LLM</span></div>
+          </div>
+          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/pulse/securing-langchain-financial-services-lessons-from-critical-balaji-rsfkc/" target="_blank" rel="noopener noreferrer" class="article-item">
+          <div class="article-item__content">
+            <div class="article-item__meta"><span class="article-item__source article-item__source--linkedin">LinkedIn</span><span class="article-item__date">February 2026</span></div>
+            <h3 class="article-item__title">Securing LangChain in Financial Services: Lessons from a Critical Vulnerability</h3>
+            <p class="article-item__excerpt">How CVE-2025-68664 exposed the risks of running LLM frameworks in regulated environments — and what to do about it.</p>
+            <div class="article-item__tags"><span class="tag">LangChain</span><span class="tag">AI Security</span><span class="tag">Financial Services</span></div>
+          </div>
+          <svg class="article-item__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
       <div style="margin-top: var(--space-8); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
         <p style="font-size: var(--text-sm); color: var(--color-text-faint);">Latest from Dev.to & LinkedIn — updated automatically.</p>
@@ -673,7 +698,7 @@
 
 
 
-// Homepage — latest 5 articles merged from Dev.to + LinkedIn
+// Homepage — prepend any articles from Dev.to + LinkedIn not already in static HTML
 (async function loadHomeArticles() {
   const container = document.getElementById('articles-list');
   if (!container) return;
@@ -682,7 +707,7 @@
     const date = new Date(a.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     const excerpt = a.description ? `<p class="article-item__excerpt">${a.description}</p>` : '';
     const badge = `<span class="article-item__source article-item__source--${a.source}">${a.source === 'devto' ? 'Dev.to' : 'LinkedIn'}</span>`;
-    const tags = a.tags.length
+    const tags = a.tags && a.tags.length
       ? `<div class="article-item__tags">${a.tags.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}</div>`
       : '';
     return `
@@ -697,6 +722,11 @@
       </a>`;
   }
 
+  // Collect URLs already rendered as static HTML — never re-insert these
+  const existing = new Set(
+    [...container.querySelectorAll('.article-item')].map(el => el.href.split('?')[0])
+  );
+
   try {
     const [devRes, liRes] = await Promise.all([
       fetch('https://dev.to/api/articles?username=jayavelubalaji&per_page=20&state=published'),
@@ -707,13 +737,15 @@
       description: a.description, tags: a.tag_list, source: 'devto'
     }));
     const liArticles = (await liRes.json()).map(a => ({ ...a, source: 'linkedin' }));
-    const all = [...devArticles, ...liArticles]
+
+    // Only prepend genuinely new articles (not already in static HTML)
+    const fresh = [...devArticles, ...liArticles]
+      .filter(a => !existing.has(a.url.split('?')[0]))
       .sort((a, b) => new Date(b.date) - new Date(a.date))
       .slice(0, 5);
-    container.innerHTML = all.map(renderCard).join('');
-  } catch {
-    container.innerHTML = '<p style="color:var(--color-text-faint)">Could not load articles. <a href="https://dev.to/jayavelubalaji" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">View on Dev.to →</a></p>';
-  }
+
+    if (fresh.length) container.insertAdjacentHTML('afterbegin', fresh.map(renderCard).join(''));
+  } catch { /* static cards remain — no action needed */ }
 })();
 
 // Contact form handler — submits via Formspree (no backend needed)
