@@ -377,6 +377,14 @@ section {
   color: var(--color-primary);
 }
 
+.hero__alias {
+  color: var(--color-text-muted);
+  font-size: 0.55em;
+  font-weight: 500;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
 .hero__desc {
   font-size: var(--text-base);
   color: var(--color-text-muted);
