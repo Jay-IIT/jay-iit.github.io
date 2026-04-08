@@ -1013,6 +1013,131 @@ section {
    FOOTER
    ============================================================ */
 
+/* ============================================================
+   SPEAKING
+   ============================================================ */
+
+.speaker-card {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+.speaker-card__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid var(--color-primary);
+}
+
+.speaker-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.speaker-card__full {
+  font-size: 0.7em;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.speaker-card__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.speaker-card__bio {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-5);
+  max-width: 62ch;
+}
+
+.speaker-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+
+.speaker-card__link:hover { gap: var(--space-3); }
+
+.speaking__sessions { margin-top: var(--space-4); }
+
+.speaking__sessions-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+}
+
+.speaking__upcoming {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-6);
+  border: 1px dashed var(--color-divider);
+  border-radius: var(--radius-lg);
+}
+
+.speaking__upcoming a { color: var(--color-primary); }
+
+.session-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.session-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.session-card__meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.session-card__desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .speaker-card { flex-direction: column; align-items: center; text-align: center; }
+  .speaker-card__bio { max-width: 100%; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
 .footer {
   border-top: 1px solid var(--color-divider);
   padding-block: var(--space-8);
