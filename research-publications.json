@@ -22,7 +22,7 @@
     "year": 2024,
     "journal": "IJISAE",
     "journal_full": "International Journal of Intelligent Systems and Applications in Engineering",
-    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "url": "https://ijisae.org/index.php/IJISAE/article/view/7264",
     "description": "Presents a deep learning pipeline for real-time hand gesture recognition targeting sign language interpretation, combining convolutional and recurrent architectures to handle temporal dynamics.",
     "tags": ["Computer Vision", "Sign Language", "Deep Learning", "Gesture Recognition"]
   },
@@ -31,7 +31,7 @@
     "year": 2023,
     "journal": "JCAA",
     "journal_full": "Journal of Computational Analysis and Applications",
-    "url": "https://scholar.google.com/citations?user=lDxN138AAAAJ&hl=en",
+    "url": "https://eudoxuspress.com/index.php/pub/article/view/2149",
     "description": "Proposes ensemble machine learning methods for customer behaviour analysis in smart retail environments, integrating transactional and demographic data to improve predictive accuracy for personalisation.",
     "tags": ["Ensemble Learning", "Retail Analytics", "Machine Learning", "Customer Analysis"]
   }
